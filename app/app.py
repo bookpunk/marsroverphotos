@@ -5,10 +5,9 @@ from app.input_data.input_data import InputData
 
 def run():
     """Main execution for running the Mars rover photos module/app"""
-    project_name = 'app'
+    config_dir = os.path.dirname(os.path.abspath(__file__))
     config_file = 'config.json'
-    cwd = os.getcwd()
-    config_path = os.path.join(cwd, project_name, config_file)
+    config_path = os.path.join(config_dir, config_file)
     with open(config_path) as infile:
         config = json.load(infile)
 
