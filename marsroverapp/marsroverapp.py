@@ -51,7 +51,7 @@ def make_api_call(date, url):
     except urllib.error.URLError as error:
         print('Skipping {}... URLError {} {}'.format(date, error.reason, url))
 
-class Marsroverphotos:
+class Marsroverapp:
     """Class file for Mars rover photos app."""
 
     def __init__(self):
@@ -98,4 +98,4 @@ class Marsroverphotos:
                 print('Skipping {}... {}'.format(date, 'no photos available'))
 
 if __name__ == "__main__":
-    Marsroverphotos().run()
+    Marsroverapp().run()

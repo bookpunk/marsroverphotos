@@ -6,7 +6,7 @@ with open('README.md', 'r') as infile:
 with open('requirements.txt', 'r') as infile:
     install_requirements = list(infile.read().splitlines())
 
-setup(name='marsroverphotos',
+setup(name='marsroverapp',
       version='0.1',
       description='Retrieve Mars Rover Photos using the NASA API',
       url='https://github.com/bookpunk/marsroverphotos.git',
@@ -16,6 +16,6 @@ setup(name='marsroverphotos',
       long_description=long_description,
       install_requires=install_requirements,
       python_requires='>=3.5',
-      packages=['marsroverphotos'],
+      packages=['marsroverapp'],
       zip_safe=False)
 
