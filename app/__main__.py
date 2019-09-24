@@ -1,5 +1,5 @@
 """Used when calling the module directly."""
-from marsroverphotos import app
+from app import app
 
 if __name__ == '__main__':
     """Entry point for Mars rover photo module."""

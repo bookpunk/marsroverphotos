@@ -1,0 +1,6 @@
+{
+  "app_dir": "app",
+  "resources_dir": "resources",
+  "dates_file": "dates.txt",
+  "supported_date_formats": ["%m/%d/%y", "%B %d, %Y", "%b-%d-%Y", "%m/%d/%Y"]
+}
