@@ -2,6 +2,8 @@
 import os
 import json
 from datetime import datetime
+import urllib.request
+import webbrowser
 
 def load_config():
     """Load the project's configuration file."""
@@ -38,6 +40,17 @@ def get_strptime(supported_date_formats, date):
                 exception_error = str(error)
     raise ValueError(exception_error)
 
+def make_api_call(date, url):
+    """Sends request to a URL and returns the JSON response."""
+    try:
+        req = urllib.request.Request(url)
+        with urllib.request.urlopen(req) as response:
+            return json.loads(response.read())
+    except urllib.error.HTTPError as error:
+        print('Skipping {}... HTTPError {} {}'.format(date, error.code, error.reason))
+    except urllib.error.URLError as error:
+        print('Skipping {}... URLError {} {}'.format(date, error.reason, url))
+
 class Marsroverphotos:
     """Class file for Mars rover photos app."""
 
@@ -52,12 +65,37 @@ class Marsroverphotos:
             except ValueError as error:
                 print('Skipping {}... {}'.format(date, error))
 
+    def download_photo(self, date, url):
+        """Download photo specified by the img_src value of a Mars rover photo."""
+        filename = url.split('/')[-1]
+        app_dir = os.path.dirname(os.path.abspath(__file__))
+        file_path = os.path.join(app_dir, self.config['downloads_dir'], filename)
+        try:
+            urllib.request.urlretrieve(url, file_path)
+        except urllib.error.HTTPError as error:
+            print('Skipping {}... HTTPError {} {}'.format(date, error.code, error.reason))
+        except urllib.error.URLError as error:
+            print('Skipping {}... URLError {} {}'.format(date, error.reason, url))
+        return file_path
+
     def run(self):
         """Main execution for running the Mars rover photos module/app"""
 
+        for date, strp in self.dates.items():
+            url = self.config['api_string'].format(strp.year,
+                                                   strp.month,
+                                                   strp.day,
+                                                   self.config['api_key'])
+            api_results = make_api_call(date, url)
 
-        print(self.dates)
+            if api_results['photos']:
+                img_src = api_results['photos'][0]['img_src']
+                file_path = self.download_photo(date, img_src)
+                print('For {}, opening {}'.format(date, file_path))
+                url = 'file://{}'.format(file_path)
+                webbrowser.open(url, new=1, autoraise=True)
+            else:
+                print('Skipping {}... {}'.format(date, 'no photos available'))
 
 if __name__ == "__main__":
-    APP = Marsroverphotos()
-    APP.run()
+    Marsroverphotos().run()

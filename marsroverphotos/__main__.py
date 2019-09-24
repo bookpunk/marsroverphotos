@@ -2,5 +2,4 @@
 from marsroverphotos import marsroverphotos
 
 if __name__ == "__main__":
-    APP = marsroverphotos.Marsroverphotos()
-    APP.run()
+    marsroverphotos.Marsroverphotos().run()
