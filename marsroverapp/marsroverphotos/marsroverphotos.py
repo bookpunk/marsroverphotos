@@ -17,17 +17,30 @@ class Marsroverphotos:
         self.file_path = ''
         self.img_src = ''
         self.api_results = {}
+        self.url = self.config['mars_photos_api_string'].format(self.strp.year,
+                                                                self.strp.month,
+                                                                self.strp.day,
+                                                                self.config['api_key'])
 
-    def make_api_call(self, url):
+    def make_api_call(self):
         """Sends request to a URL and returns the JSON response."""
+        req = urllib.request.Request(self.url)
+        with urllib.request.urlopen(req) as response:
+            return json.loads(response.read())
+
+    def get_img_src(self):
+        """Make a call to the API to get a response containing information about the
+           photos from a specific day."""
+
         try:
-            req = urllib.request.Request(url)
-            with urllib.request.urlopen(req) as response:
-                return json.loads(response.read())
+            self.api_results = self.make_api_call()
         except urllib.error.HTTPError as error:
             print('Skipping {}... HTTPError {} {}'.format(self.date, error.code, error.reason))
         except urllib.error.URLError as error:
             print('Skipping {}... URLError {} {}'.format(self.date, error.reason, url))
+
+        if self.api_results['photos']:
+            self.img_src = self.api_results['photos'][0]['img_src']
 
     def download_image(self):
         """Download photo specified by the img_src value of a Mars rover photo."""
@@ -45,18 +58,6 @@ class Marsroverphotos:
         else:
             print('Skipping {}... no photos available'.format(self.date))
 
-    def get_details(self):
-        """Make a call to the API to get a response containing details about the
-           photos from that day."""
-
-        url = self.config['mars_photos_api_string'].format(self.strp.year,
-                                                           self.strp.month,
-                                                           self.strp.day,
-                                                           self.config['api_key'])
-
-        self.api_results = self.make_api_call(url)
-        if self.api_results['photos']:
-            self.img_src = self.api_results['photos'][0]['img_src']
 
     def display_in_browser(self):
         """Display the downloaded image in a browser."""
