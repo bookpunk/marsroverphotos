@@ -16,6 +16,14 @@ See https://www.python.org/ for downloads.
 python3 setup.py install
 ```
 
+## Running the app
+
+From the project's main directory, marsroverphotos, run the following command.
+
+```
+python3 -m marsroverapp
+```
+
 ## Running the tests
 
 Explain how to run the automated tests for this system
@@ -23,18 +31,6 @@ Explain how to run the automated tests for this system
 ```
 python3 -m unittest discover -v
 ```
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Authors
 
