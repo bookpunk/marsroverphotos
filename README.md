@@ -12,8 +12,28 @@ See https://www.python.org/ for downloads.
 
 ### Installing
 
+After cloning the repo, from the project's main directory, marsroverphotos, run the following commands.
+
+Please use a virtualenv before installing this app.
+
 ```
-python3 setup.py install
+pip install virtualenv
+python -m virtualenv venv
+```
+
+For non-Windows...
+```
+source venv/bin/activate
+```
+
+On Windows...
+```
+venv\Scripts\activate
+```
+
+And finally, to install the app (on any platform)...
+```
+python setup.py install
 ```
 
 ## Running the app
@@ -21,7 +41,7 @@ python3 setup.py install
 From the project's main directory, marsroverphotos, run the following command.
 
 ```
-python3 -m marsroverapp
+python -m marsroverapp
 ```
 
 ## Running the tests
@@ -29,7 +49,7 @@ python3 -m marsroverapp
 Explain how to run the automated tests for this system
 
 ```
-python3 -m unittest discover -v
+python -m unittest discover -v
 ```
 
 ## Authors
