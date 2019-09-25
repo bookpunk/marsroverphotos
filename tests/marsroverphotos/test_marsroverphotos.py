@@ -8,11 +8,11 @@ import urllib
 class TestMarsroverphotos(unittest.TestCase):
     def setUp(self):
         self.config = {"resources_dir": "resources",
-                  "dates_file": "dates.txt",
-                  "supported_date_formats": ["%m/%d/%y", "%B %d, %Y", "%b-%d-%Y", "%m/%d/%Y"],
-                  "downloads_dir": "downloads",
-                  "api_key": "xExiSNivrhKvu1TMcWoxjninrDt7bqFhnWWVVfx9",
-                  "mars_photos_api_string": "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date={}-{}-{}&api_key={}"}
+                       "dates_file": "dates.txt",
+                       "supported_date_formats": ["%m/%d/%y", "%B %d, %Y", "%b-%d-%Y", "%m/%d/%Y"],
+                       "photos_dir": "photos",
+                       "api_key": "xExiSNivrhKvu1TMcWoxjninrDt7bqFhnWWVVfx9",
+                       "mars_photos_api_string": "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date={}-{}-{}&api_key={}"}
 
     def test_make_api_call_1(self):
         date = '2017-02-27'

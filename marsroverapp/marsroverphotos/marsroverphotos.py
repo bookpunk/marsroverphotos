@@ -47,7 +47,7 @@ class Marsroverphotos:
         if self.img_src:
             self.file_name = self.img_src.split('/')[-1]
             self.file_path = os.path.join(self.config['app_dir'],
-                                          self.config['downloads_dir'],
+                                          self.config['photos_dir'],
                                           self.file_name)
             try:
                 urllib.request.urlretrieve(self.img_src, self.file_path)
