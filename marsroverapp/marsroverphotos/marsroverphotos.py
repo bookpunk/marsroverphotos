@@ -37,7 +37,7 @@ class Marsroverphotos:
         except urllib.error.HTTPError as error:
             print('Skipping {}... HTTPError {} {}'.format(self.date, error.code, error.reason))
         except urllib.error.URLError as error:
-            print('Skipping {}... URLError {} {}'.format(self.date, error.reason, url))
+            print('Skipping {}... URLError {} {}'.format(self.date, error.reason, self.url))
 
         if self.api_results['photos']:
             self.img_src = self.api_results['photos'][0]['img_src']

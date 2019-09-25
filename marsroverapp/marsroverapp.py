@@ -15,6 +15,7 @@ class Marsroverapp:
         self.config = {}
 
     def load_config(self):
+        """Load the app's configuration file."""
         self.app_dir = os.path.dirname(os.path.abspath(__file__))
         config_path = os.path.join(self.app_dir, 'config.json')
         try:
@@ -38,6 +39,8 @@ class Marsroverapp:
         raise ValueError(exception_error)
 
     def validate_dates(self):
+        """Validate that the dates from the file are all valid.
+           Skip any that are not."""
         for date in self.dates_list:
             try:
                 self.dates[date] = self.get_strptime(date)
